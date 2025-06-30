@@ -330,3 +330,4 @@ export const storage = {
       return null;
     }
   },
+};

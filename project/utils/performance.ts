@@ -1,3 +1,7 @@
+/// <reference lib="dom" />
+
+/// <reference lib="dom" />
+
 import { Platform } from 'react-native';
 import { encryption } from './encryption';
 

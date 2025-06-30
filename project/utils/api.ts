@@ -1,3 +1,7 @@
+/// <reference lib="dom" />
+
+/// <reference lib="dom" />
+
 /**
  * SecuriComm API Service
  * 

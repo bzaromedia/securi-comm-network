@@ -1,5 +1,8 @@
 {
   "dependencies": {
-    "mongoose": "^8.16.0"
+    "mongoose": "^8.16.1"
+  },
+  "devDependencies": {
+    "@types/jest": "^30.0.0"
   }
 }

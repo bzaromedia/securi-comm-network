@@ -126,6 +126,14 @@ export function SecurityNotifications({
           backgroundColor: 'rgba(0, 255, 148, 0.1)',
           borderColor: '#00FF94',
         };
+      default: // Add a default case for unknown types
+        console.warn(`Unknown notification type: ${type}. Defaulting to 'info'.`);
+        return {
+          icon: Info,
+          color: '#00D4FF',
+          backgroundColor: 'rgba(0, 212, 255, 0.1)',
+          borderColor: '#00D4FF',
+        };
     }
   };
 

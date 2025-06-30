@@ -33,7 +33,7 @@ export const authenticateConnection = async (token) => {
 /**
  * Handle new Socket.IO connection
  */
-export const handleConnection = (socket, userId) => {
+export const handleConnection = (io, socket, userId) => {
   // Store connection: a user can have multiple active sockets (e.g., from different devices)
   // We use socket.id to manage individual connections
   userSocketMap.set(socket.id, userId);
@@ -46,7 +46,7 @@ export const handleConnection = (socket, userId) => {
   });
 
   // Update user's online status
-  updateUserStatus(userId, true);
+  updateUserStatus(io, userId, true);
 
   // Handle disconnection
   socket.on('disconnect', () => {
@@ -54,7 +54,7 @@ export const handleConnection = (socket, userId) => {
     // Check if the user has any other active connections
     const hasOtherConnections = Array.from(userSocketMap.values()).includes(userId);
     if (!hasOtherConnections) {
-      updateUserStatus(userId, false);
+      updateUserStatus(io, userId, false);
     }
   });
 };
@@ -62,7 +62,7 @@ export const handleConnection = (socket, userId) => {
 /**
  * Update user's online status
  */
-const updateUserStatus = async (userId, isOnline) => {
+const updateUserStatus = async (io, userId, isOnline) => {
   try {
     // Update user's last active timestamp
     await User.findByIdAndUpdate(userId, {
@@ -70,7 +70,7 @@ const updateUserStatus = async (userId, isOnline) => {
     });
 
     // Broadcast status change to relevant users
-    broadcastUserStatus(userId, isOnline);
+    broadcastUserStatus(io, userId, isOnline);
   } catch (error) {
     console.error('Update user status error:', error);
   }
@@ -79,7 +79,7 @@ const updateUserStatus = async (userId, isOnline) => {
 /**
  * Broadcast user status change to relevant users
  */
-const broadcastUserStatus = async (userId, isOnline) => {
+const broadcastUserStatus = async (io, userId, isOnline) => {
   try {
     // Find all conversations where the user is a participant
     const conversations = await Conversation.find({

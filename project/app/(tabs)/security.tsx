@@ -12,9 +12,9 @@ import { BlurView } from 'expo-blur';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useSecurity } from '@/contexts/SecurityContext';
 import { AISecurityEngine } from '@/components/AISecurityEngine';
-import { ThreatMeter } from '@/components/ThreatMeter';
-import { SecurityBadge } from '@/components/SecurityBadge';
-import { EncryptionIndicator } from '@/components/EncryptionIndicator';
+import ThreatMeter from '@/components/ThreatMeter';
+import SecurityBadge from '@/components/SecurityBadge';
+import EncryptionIndicator from '@/components/EncryptionIndicator';
 import {
   Shield,
   Brain,

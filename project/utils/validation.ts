@@ -23,10 +23,7 @@ export const ValidationSchemas = {
     .max(10000, 'Message too long')
     .refine(content => !content.includes('<script'), 'Invalid content detected'),
   
-  fileName: z.string()
-    .min(1, 'Filename required')
-    .max(255, 'Filename too long')
-    .regex(/^[^<>:"/\\|?*\x00-\x1f]+$/, 'Invalid filename characters'),
+  fileName: z.string().min(1, 'Filename required').max(255, 'Filename too long').regex(/^[^\n<>:"/\\|?*\s]+$/, 'Invalid filename characters'),
   
   fileSize: z.number()
     .min(1, 'File cannot be empty')

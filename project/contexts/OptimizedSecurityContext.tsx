@@ -29,12 +29,12 @@ const SecurityContext = createContext<SecurityContextType>({} as SecurityContext
 
 export function OptimizedSecurityProvider({ children }: { children: React.ReactNode }) {
   const [securityState, setSecurityState] = useState({
-    securityLevel: 'high' as const,
+    securityLevel: 'high' as SecurityContextType['securityLevel'],
     threatLevel: 0,
     isDeviceSecure: true,
-    encryptionStatus: 'active' as const,
+    encryptionStatus: 'active' as SecurityContextType['encryptionStatus'],
     isEmergencyMode: false,
-    meshNetworkStatus: 'disconnected' as const,
+    meshNetworkStatus: 'disconnected' as SecurityContextType['meshNetworkStatus'],
     threatDetection: {
       level: 0,
       confidence: 0,
